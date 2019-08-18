@@ -18,7 +18,7 @@ pipeline {
                 echo "Code quality check"
                 checkstyle canComputeNew: false, defaultEncoding: '', healthy: '', pattern: '', unHealthy: ''
                 echo "publish juni report"
-                junit '**/surefire-report/*.xml'
+                junit '**/surefire-reports/*.xml'
             }
         }
 
