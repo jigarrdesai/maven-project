@@ -32,7 +32,7 @@ pipeline {
         stage('Deploy'){
             steps{
                 echo "This is Deployment stage"
-                build 'dev-deploy'
+                build 'dev-deploy-java-job'
             }
         }
 
