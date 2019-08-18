@@ -15,16 +15,24 @@ pipeline {
             steps{
                 echo "This is Build stage"
                 sh label: '',script:'mvn clean package checkstyle:checkstyle'
-                echo "Code quality check"
-                checkstyle canComputeNew: false, defaultEncoding: '', healthy: '', pattern: '', unHealthy: ''
-                echo "publish juni report"
-                junit '**/surefire-reports/*.xml'
+                
+            }
+            post{
+                success{
+                    echo "Code quality check"
+                    checkstyle canComputeNew: false, defaultEncoding: '', healthy: '', pattern: '', unHealthy: ''
+                    echo "publish juni report"
+                    junit '**/surefire-reports/*.xml'
+                    echo "Archive Artifact"
+                    archiveArtifacts '**/webapp.war'
+                }
             }
         }
 
         stage('Deploy'){
             steps{
                 echo "This is Deployment stage"
+                build 'dev-deploy'
             }
         }
 
