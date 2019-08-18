@@ -31,6 +31,11 @@ pipeline {
 
         stage('Deploy'){
             steps{
+                timeout(1) {
+                    // some block
+                    input 'Do you want to proceed Dev Deployment'
+                }
+                
                 echo "This is Deployment stage"
                 build 'dev-deploy-java-job'
             }
